@@ -1460,6 +1460,7 @@ App.Utils.CalendarDefaultView = (function () {
             height: getCalendarHeight(),
             editable: true,
             firstDay: firstWeekdayNumber,
+            scrollTime: "12:00:00",
             slotDuration: '00:15:00',
             snapDuration: '00:15:00',
             slotLabelInterval: '01:00',

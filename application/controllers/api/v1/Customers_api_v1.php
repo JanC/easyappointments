@@ -117,6 +117,41 @@ class Customers_api_v1 extends EA_Controller {
     /**
      * Create a customer.
      */
+    public function hook()
+    {
+        try
+        {
+            $customer = request()['form_submit_data'];
+
+            $this->customers_model->api_decode($customer);
+
+            
+            if (!$this->customers_model->exists($customer))
+            {
+                $customer_id = $this->customers_model->save($customer);
+                $created_customer = $this->customers_model->find($customer_id);
+                $this->customers_model->api_encode($created_customer);
+                json_response($created_customer, 201);
+            }
+            
+
+            // $customer_id = $this->customers_model->save($customer);
+
+            // $created_customer = $this->customers_model->find($customer_id);
+
+            // $this->customers_model->api_encode($created_customer);
+
+            json_response(["OK"], 201);
+        }
+        catch (Throwable $e)
+        {
+            json_exception($e);
+        }
+    }
+
+    /**
+     * Create a customer.
+     */
     public function store()
     {
         try
